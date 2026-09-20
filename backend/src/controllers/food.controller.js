@@ -1,30 +1,34 @@
 const foodModel = require("../models/food.model");
 const storageService = require("../services/storage.service");
-const { v4: uuid } = require("uuid");
-
 const likeModel = require("../models/likes.model");
 const saveModel = require("../models/saves.model");
 
+
+async function getUploadAuthentication(req, res) {
+    const authenticationParameters =
+        storageService.getUploadAuthenticationParameters();
+
+    res.status(200).json(authenticationParameters);
+}
+
+
 async function createFood(req, res) {
-    // res.send("Food item created")
 
-    // console.log(req.body)
-    // console.log(req.file)
+    const { name, description, video } = req.body;
 
-    const fileUploadResult = await storageService.uploadFile(
-        req.file.buffer,
-        uuid(),
-    );
-
-    // console.log(fileUploadResult)
-
-    //   DAO file anjd Express validator
+    if (!name?.trim() || !video?.trim()) {
+        return res.status(400).json({
+            message: "Food name and video are required",
+        });
+    }
 
     const foodItem = await foodModel.create({
-        name: req.body.name,
-        video: fileUploadResult,
-        description: req.body.description,
+
+        name: name.trim(),
+        video: video,
+        description: description?.trim(),
         foodPartner: req.auth.account._id,
+
     });
 
     res.status(201).json({
@@ -32,6 +36,7 @@ async function createFood(req, res) {
         foodItem: foodItem,
     });
 }
+
 
 async function getFoodItems(req, res) {
     //we already know who the current user is because
@@ -215,6 +220,7 @@ async function getSaveFood(req, res) {
 }
 
 module.exports = {
+    getUploadAuthentication,
     createFood,
     getFoodItems,
     likeFood,

@@ -5,6 +5,12 @@ const foodPartnerModel = require("../models/foodPartner.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+};
+
 //we were making anonymous controller functions when we were writing them directly inside app.js inside get, put etc methods in the form of (req, res) => {}
 
 async function registerUser(req, res) {
@@ -53,7 +59,7 @@ async function registerUser(req, res) {
     );
 
     //now we create a cookie that contains the jwt string and send it to the browser. res.cookie() creates the "cookie" and fills the content in the following manner: 1st parameter is the name of the cookie and the 2nd param is the cookie value
-    res.cookie("token", token);
+    res.cookie("token", token, cookieOptions);
 
     //sending success message to the front-end after sending the cookie to ack that the user has been created successfully
     res.status(201).json({
@@ -100,7 +106,7 @@ async function loginUser(req, res) {
         process.env.JWT_SECRET,
     );
 
-    res.cookie("token", token);
+    res.cookie("token", token, cookieOptions);
 
     res.status(200).json({
         message: "User logged in successfully",
@@ -115,7 +121,7 @@ async function loginUser(req, res) {
 //async not needed since nothing to await
 function logoutUser(req, res) {
     //if we clear the cookie on the browser then the session will get disconnected/closed
-    res.clearCookie("token");
+    res.clearCookie("token", cookieOptions);
 
     //and after successfully clear the cookie send the following
     res.status(200).json({
@@ -168,7 +174,7 @@ async function registerFoodPartner(req, res) {
         process.env.JWT_SECRET,
     );
 
-    res.cookie("token", token);
+    res.cookie("token", token, cookieOptions);
 
     res.status(201).json({
         message: "Food Partner successfully registered!",
@@ -216,7 +222,7 @@ async function loginFoodPartner(req, res) {
         process.env.JWT_SECRET,
     );
 
-    res.cookie("token", token);
+    res.cookie("token", token, cookieOptions);
 
     res.status(200).json({
         message: "Food Partner successfully logged in!",
@@ -230,7 +236,7 @@ async function loginFoodPartner(req, res) {
 
 //async not needed since nothing to await
 function logoutFoodPartner(req, res) {
-    res.clearCookie("token");
+    res.clearCookie("token", cookieOptions);
 
     res.status(200).json({
         message: "Food Partner successfully logged out",

@@ -13,7 +13,7 @@ const app = express();
 
 //using cors we specified from where we will get our frontend data
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
     //credentials: true bcs we use cookies for creds
     credentials: true,
 }))

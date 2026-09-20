@@ -48,6 +48,11 @@ const foodService = {
         return response.data;
     },
 
+    getImageKitUploadAuthentication: async () => {
+        const response = await api.get("/api/food/upload-auth");
+        return response.data;
+    },
+
 }
 
 export default foodService;
