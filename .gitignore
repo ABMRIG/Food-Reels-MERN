@@ -1,0 +1,6 @@
+.env
+node_modules
+/bruno/
+/Important setting for MongoDB connection/
+.vscode
+/frontend/dist/
