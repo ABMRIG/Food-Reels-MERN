@@ -12,12 +12,21 @@ const foodPartnerRoutes = require("./routes/food-partner.route")
 const app = express();
 
 //using cors we specified from where we will get our frontend data
-app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
-    //credentials: true bcs we use cookies for creds
-    credentials: true,
-}))
+const allowedOrigin =
+    process.env.NODE_ENV === "production"
+        ? "https://foodreels-kappa.vercel.app"
+        : "http://localhost:5173";
 
+app.use(cors({
+    origin: allowedOrigin,
+    credentials: true,
+}));
+
+//explicitly handle CORS preflight requests
+app.options(/.*/, cors({
+    origin: allowedOrigin,
+    credentials: true,
+}));
 
 // IMPORTANT: express.json() is the Middleware 
 // IMPORTANT: app.use() is an Express method used to tell Express which Middleware to use.
