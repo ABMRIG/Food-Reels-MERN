@@ -44,7 +44,7 @@ app.use(express.json())
 // req, res are Standard JavaScript Objects
 // the 2nd parameter of app.get() is controller
 app.get("/", (req, res) => {
-    res.send("<h1>Hello from server!</h1>");
+    res.send("DEPLOYMENT TEST - NEW APP.JS");
 })
 
 app.use("/api/auth", authRoutes);
