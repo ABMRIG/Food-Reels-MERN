@@ -20,6 +20,7 @@ app.use(cors({
     credentials: true,
 }));
 
+//explicitly handle CORS preflight requests
 app.options(/.*/, cors({
     origin: allowedOrigin,
     credentials: true,
@@ -30,28 +31,23 @@ app.use(express.json());
 
 
 //make sure MongoDB is connected before handling any request
-
 app.use(async (req, res, next) => {
 
     try {
-
         await connectDB();
-
         next();
-
     }
+
     catch (err) {
-
         next(err);
-
     }
-
 });
 
 
 app.get("/", (req, res) => {
-    res.send("DEPLOYMENT TEST - NEW APP.JS");
+    res.send("<h1>Hello from server!</h1>");
 });
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/food", foodRoutes);
