@@ -1,8 +1,10 @@
 {
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+  "_comment": "Vercel configuration for the Food Reels React single-page application.",
+  "rewrites": [
+    {
+      "_comment": "Send every requested path to the React entry point so client-side routes work after refresh.",
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

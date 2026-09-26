@@ -27,6 +27,12 @@ app.options(/.*/, cors({
 }));
 
 app.use(cookieParser());
+
+
+// Intercepts the Request: The middleware intercepts incoming requests before they hit your routes.
+// Checks the Type: It looks at the Content-Type header. If it matches application/json, it moves forward.
+// Parses the Body: It reads the incoming raw data stream and runs it through a parser (similar to JSON.parse()).
+// Populates req.body: It assigns the final JavaScript object to req.body so you can use it immediately.
 app.use(express.json());
 
 

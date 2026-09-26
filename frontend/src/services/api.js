@@ -1,5 +1,12 @@
 import axios from "axios"
 
+//using axios we are able to: 
+//send GET reqs to fetch food feeds, saved foods, profiles, auth status etc
+//send POST reqs for registration, login, likes, saves and food creation
+//prepaend urls like baseURL below
+//send and receive auth cookies
+
+
 const api = axios.create({
     //Why VITE_? Vite only exposes environment variables to frontend code when they begin with VITE_.
 
