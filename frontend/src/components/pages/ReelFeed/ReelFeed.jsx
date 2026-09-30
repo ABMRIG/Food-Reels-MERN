@@ -65,13 +65,13 @@ function ReelFeed({ foodItems, onLike, onSave }) {
 
     return (
 
-        <main className="h-screen w-full overflow-y-auto snap-y snap-mandatory flex flex-col items-center">
+        <main className="h-[calc(100dvh-4rem)] w-full overflow-y-auto snap-y snap-mandatory flex flex-col items-center md:h-screen">
 
             {foodItems.map((food) => (
 
                 <section
                     key={food._id}
-                    className="relative h-screen w-full shrink-0 snap-start bg-black md:w-125"
+                    className="relative h-full w-full shrink-0 snap-start bg-black md:h-screen md:w-125"
                 >
 
                     {/* Food video */}

@@ -111,7 +111,7 @@ function UserLayout() {
 
 
             {/* Main page area */}
-            <main className="pb-16 md:ml-60 md:pb-0">
+            <main className="md:ml-60">
 
                 <Outlet />
 

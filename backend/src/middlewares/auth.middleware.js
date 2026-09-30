@@ -22,7 +22,7 @@ async function authenticate(req, res, next) {
 
     }
 
-    //IMPORTANT: why "try-catch" in middleware but not in middleware:
+    //IMPORTANT: why "try-catch" in middleware but not in controller:
 
     /*In JWT authentication middleware, asynchronous operations and external library methods can throw unexpected errors:
 

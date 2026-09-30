@@ -228,6 +228,7 @@ function CreateFood() {
 
 
                     {/* Upload progress */}
+                    {/* check inside submitFood(). progress is calculated there by the help of "onProgress" which is a callback provided by the @imagekit/javascript upload API*/}
                     {loading && uploadProgress > 0 && (
 
                         <div>
@@ -269,7 +270,7 @@ function CreateFood() {
                         }
 
                     </button>
-                    
+
                 </form>
             </div>
         </main>

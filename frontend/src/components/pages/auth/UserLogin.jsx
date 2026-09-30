@@ -23,8 +23,12 @@ function UserLogin() {
         setLoading(true);
 
         try {
+            //we first login the user, then fetch the user account so that cookie based communication can be done
+
+            //see here we store nothing in a variable, we jsut wat for the cookie
             await authService.loginUser(data);
 
+            //here we have already gotten the cookie so we simply send it
             const response = await authService.getCurrentAccount();
 
             dispatch(
