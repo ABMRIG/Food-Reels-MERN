@@ -26,6 +26,9 @@ import RoleBasedHome from "./components/RoleBasedHome.jsx";
 const router = createBrowserRouter([
 
     {
+        //App.jsx is always rendered as parent
+        //it fetches the current user and updates the Redux
+        //this way the authentication and authorization is made available to every component
         path: "/",
         element: <App />,
 

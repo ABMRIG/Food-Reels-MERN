@@ -1,4 +1,4 @@
-import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { Outlet, NavLink, useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -57,10 +57,12 @@ function UserLayout() {
             <aside className="fixed left-0 top-0 hidden h-screen w-60 border-r border-white/10 bg-black px-6 py-8 md:flex md:flex-col">
 
                 {/* Application name */}
-                <h1 className="mb-10 text-2xl font-bold">
-                    FoodReels
-                </h1>
-
+                <Link to={`/`}>
+                    <h1 className="mb-10 text-2xl font-bold">
+                        FoodReels
+                    </h1>
+                </Link>
+                    
 
                 {/* Navigation */}
                 <nav className="flex flex-col gap-4">

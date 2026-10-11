@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import foodService from "../../../services/food";
 import ReelFeed from "../ReelFeed/ReelFeed";
 
+//this component handles the fetching of videos and processsing the likes and saves.
+//ReelFeed.jsx is responsible for rendering the videos and not Home.jsx
+
 function Home() {
 
     const [foodItems, setFoodItems] = useState([]);

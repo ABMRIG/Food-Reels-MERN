@@ -10,6 +10,11 @@ import { useDispatch } from 'react-redux'
 import authService from './services/auth'
 import { login, logout } from './store/authSlice'
 
+//App.jsx is always rendered as parent
+//it fetches the current user and updates the Redux
+//this way the authentication and authorization is made available to every component
+
+//It also shows a loading screen until the redux is updated
 
 function App() {
 
@@ -62,7 +67,7 @@ function App() {
 
             }
 
-            catch(err) {
+            catch (err) {
 
                 //if /api/auth/me fails, it normally means that
                 //there is no valid authentication cookie
@@ -115,7 +120,7 @@ function App() {
     return (
         <>
             <main>
-                <Outlet/>
+                <Outlet />
             </main>
         </>
     )

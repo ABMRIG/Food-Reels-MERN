@@ -56,6 +56,7 @@ function FoodPartnerLayout() {
             <aside className="fixed left-0 top-0 hidden h-screen w-60 border-r border-white/10 bg-black px-6 py-8 md:flex md:flex-col">
 
                 {/* Application name */}
+                
                 <h1 className="mb-10 text-2xl font-bold">
                     FoodReels
                 </h1>

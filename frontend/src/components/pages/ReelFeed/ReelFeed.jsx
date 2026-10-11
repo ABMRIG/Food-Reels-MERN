@@ -15,38 +15,39 @@ import {
 
 function ReelFeed({ foodItems, onLike, onSave }) {
 
-    //this makes sure that only the reel currently visible on screen plays*
-    //when we scroll to another reel, the previous video is paused*
-    //when we come back to it, the video starts playing again*
+    //this makes sure that only the reel currently visible on screen plays
+    //when we scroll to another reel, the previous video is paused
+    //when we come back to it, the video starts playing again
     useEffect(() => {
 
         const videos = document.querySelectorAll("video");
 
+        // The browser provides an API called IntersectionObserver
+        // It lets you observe an element and receive notifications when that element enters or leaves an intersection with a specified area. By default, that area is the browser viewport, but you can specify another element as the observation root.
         const observer = new IntersectionObserver(
             (entries) => {
-
                 entries.forEach((entry) => {
-
                     const video = entry.target;
 
-                    if (entry.isIntersecting) {
-
-                        //play the video when its reel becomes visible*
+                    //isIntersecting checks if the entry is intersecting the root
+                    //intersecting ration is when 60% of the video is visible in the view port
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+                        //play the video when its reel becomes visible
                         video.play().catch(() => {
-                            //browser may reject play in some situations*
+                            //browser may reject play in some situations
+                            console.log("Video playwback error");
                         });
 
                     } else {
-
-                        //pause videos that are no longer visible*
+                        //pause videos that are no longer visible
                         video.pause();
-
                     }
-
                 });
 
             },
             {
+                // it controls the when the notification is sent.
+                // this notification will get triggered when the video covers 60% of the viewport i.e. the vid starts playing when the vid takes 60% of the screen
                 threshold: 0.6,
             }
         );
@@ -55,7 +56,7 @@ function ReelFeed({ foodItems, onLike, onSave }) {
             observer.observe(video);
         });
 
-        //cleanup when component is removed*
+        //cleanup when component is removed
         return () => {
             observer.disconnect();
         };
@@ -68,14 +69,12 @@ function ReelFeed({ foodItems, onLike, onSave }) {
         <main className="h-[calc(100dvh-4rem)] w-full overflow-y-auto snap-y snap-mandatory flex flex-col items-center md:h-screen">
 
             {foodItems.map((food) => (
-
                 <section
                     key={food._id}
                     className="relative h-full w-full shrink-0 snap-start bg-black md:h-screen md:w-125"
                 >
 
                     {/* Food video */}
-
                     <video
                         src={food.video}
                         autoPlay
@@ -86,13 +85,11 @@ function ReelFeed({ foodItems, onLike, onSave }) {
                     />
 
                     {/* Dark gradient at the bottom so the text is easier to read */}
-
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/80 to-transparent pointer-events-none">
                     </div>
 
 
                     {/* Food information */}
-
                     <div className="absolute bottom-8 left-6 right-24 text-white">
 
                         <h2 className="text-2xl font-bold">
@@ -114,7 +111,6 @@ function ReelFeed({ foodItems, onLike, onSave }) {
 
 
                     {/* Like and Save buttons */}
-
                     <div className="absolute bottom-24 right-5 flex flex-col items-center gap-6 text-white">
 
                         {/* Like */}
@@ -145,13 +141,11 @@ function ReelFeed({ foodItems, onLike, onSave }) {
 
 
                         {/* Save */}
-
                         <button
                             type="button"
                             onClick={() => onSave(food._id)}
                             className="flex flex-col items-center gap-1 transition-transform active:scale-90"
                         >
-
                             <FontAwesomeIcon
                                 icon={
                                     food.isSaved
@@ -169,11 +163,8 @@ function ReelFeed({ foodItems, onLike, onSave }) {
                             </span>
 
                         </button>
-
                     </div>
-
                 </section>
-
             ))}
 
         </main>
