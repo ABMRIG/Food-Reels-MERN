@@ -16,7 +16,8 @@ function Home() {
 
         async function fetchFoodItems() {
             try {
-                //this fetches all the food items for our feed
+                //getFoodItems fetches all the food items for our feed
+                //we also send the user id so we also retrieve if this user has liked or saved the video using getFoodItems
                 const response = await foodService.getFoodItems();
 
                 setFoodItems(response.foodItems)

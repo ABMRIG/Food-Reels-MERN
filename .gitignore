@@ -4,3 +4,4 @@ node_modules
 /Important setting for MongoDB connection/
 .vscode
 /frontend/dist/
+/output
